@@ -1,0 +1,19 @@
+name: Merge the develop branch into the list-command branch
+
+on:
+  schedule:
+    - cron: '0 /5 * * *'
+
+jobs:
+  update-branch:
+    if: github.repository == 'andrew-zhan139/aws-sam-cli'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge develop -> list-command
+        uses: actions/checkout@v3
+      - run: curl \
+            -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
+            https://api.github.com/repos/andrew-zhan139/aws-sam-cli/merges \
+            -d '{"base":"test-list-command","head":"test-branch","commit_message":"merge test-list-command into test-branch"}'

@@ -2,7 +2,7 @@ name: Merge the develop branch into the list-command branch
 
 on:
   schedule:
-    - cron: '0 /5 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   update-branch:
